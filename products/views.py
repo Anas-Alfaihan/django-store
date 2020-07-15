@@ -16,8 +16,7 @@ def products_list(request):
 
 
 def show_time(request):
-    time_now = timezone.now()
-    return render(request, 'show-time.html', {'time': time_now})
+    return render(request, 'show-time.html')
 
 
 def product_details(request, pk):
