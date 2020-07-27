@@ -1,0 +1,7 @@
+<h2>Make order</h2>
+<p>Please fillin your address to make an order</p>
+<form action="" method="POST">
+    {%  csrf_token%}
+    {{ form.as_p }}
+    <input type="submit" value="order">
+</form>

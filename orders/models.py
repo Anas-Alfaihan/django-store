@@ -4,6 +4,6 @@ from products.models import Product
 # Create your models here.
 User = get_user_model()
 class Order(models.Model):
-    address = models.TextField(max_length=500)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    address = models.CharField(max_length=500)
+    user = models.ForeignKey(User, related_name='order', on_delete=models.CASCADE)
     items = models.ManyToManyField(Product)

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.contrib.auth import get_user_model
 from products.models import Product
 from django.db.models.signals import post_save
@@ -11,6 +12,10 @@ class Cart(models.Model):
         User, related_name='cart', on_delete=models.CASCADE)
     items = models.ManyToManyField(Product)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def total_price(self):
+        total =self.items.aggregate(Sum('price'))
+        return total['price__sum']
 
     def __str__(self):
         return self.user.username
