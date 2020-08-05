@@ -10,7 +10,7 @@ if debug_option == 'true':
 else:
     DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com']
+ALLOWED_HOSTS = ['.herokuapp.com', 'AnasAlfaihan.pythonanywhere.com']
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
 
