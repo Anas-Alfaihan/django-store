@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
 from .forms import AddProductForm
 from django.shortcuts import redirect
-import requests
+
 
 # Create your views here.
 
