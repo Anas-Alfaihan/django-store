@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Product
 from .forms import AddProductForm
 from django.shortcuts import redirect
+import requests
 
 # Create your views here.
 
@@ -34,14 +35,14 @@ def product_add(request):
 def product_edit(request, pk):
     if request.user.is_authenticated and request.user.is_superuser:
         product = get_object_or_404(Product, pk=pk)
-
+    
         if request.method == 'POST':
-            form = AddProductForm(
-                request.POST, request.FILES, instance=product)
+            form = AddProductForm(request.POST, request.FILES, instance=product)
 
             if form.is_valid():
                 form.save()
-                return render(request, 'products/product-add-successful.html')
+            
+            return render(request, 'products/product-add-successful.html')
         else:
             form = AddProductForm(instance=product)
         return render(request, 'products/product-add.html', {'form': form})
@@ -54,3 +55,6 @@ def product_delete(request, pk):
         product = get_object_or_404(Product, pk=pk)
         product.delete()
     return redirect('products_list')
+
+
+
