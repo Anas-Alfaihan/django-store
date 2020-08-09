@@ -1,16 +1,66 @@
-<ul>
-    {% for product in products %}
-    <li>
-        <h2>{{product.title | capfirst}}</h2>
-        <a href="{% url 'remove_from_cart' product_id=product.id %}">Remove From cart</a>
-    </li>
-    {% empty %}
-    <li>No products yet.</li>
-    {% endfor %}
-</ul>
-{% if products %}
-<p>Total Price: {{ total_price }}</p>
-<a href="{% url 'remove_all' %}">Clear Cart</a>
-<a href="{% url 'checkout_order' %}">Checkout</a>
-<a href="{% url 'products_list' %}">Product-list</a>
-{% endif %}
+{% extends "base.html" %}
+{% block head_title %}Cart{% endblock %}
+
+{% block content %}
+
+
+<div class="col-lg-10 col-xl-7 m-lr-auto m-b-50" style="margin-top: 200px;" id="wrap-table-shopping-cart">
+    <div class="m-l-25 m-r--38 m-lr-0-xl">
+        <div class="wrap-table-shopping-cart">
+            <table class="table-shopping-cart">
+                <tbody>
+                    {% if products %}
+                    <tr class="table_head">
+                        <th class="column-1">Product</th>
+                        <th class="column-2">title</th>
+                        <th class="column-3">Price</th>
+                    </tr>
+                    {% endif %}
+                    {% for product in products %}
+                    <tr class="table_row">
+                        <td class="column-1">
+                            <div class=".header-cart-item-img"
+                                style="background-image: url({{product.image.url}}); background-size: cover; height: 100px; width: 90px; margin: auto;">
+                                <a href="{% url 'remove_from_cart' product_id=product.id %}">
+                                    <div id="lin-r">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24"
+                                            height="24">
+                                            <path fill="#fff" fill-rule="evenodd"
+                                                d="M5.72 5.72a.75.75 0 011.06 0L12 10.94l5.22-5.22a.75.75 0 111.06 1.06L13.06 12l5.22 5.22a.75.75 0 11-1.06 1.06L12 13.06l-5.22 5.22a.75.75 0 01-1.06-1.06L10.94 12 5.72 6.78a.75.75 0 010-1.06z">
+                                            </path>
+                                        </svg></div>
+                                </a>
+                            </div>
+                        </td>
+                        <td class="column-2">{{product.title | capfirst}}</td>
+                        <td class="column-3">${{product.price | floatformat:2}}</td>
+                    </tr>
+                    {% empty %}
+                    <h2>No products yet.</h2>
+                    {% endfor %}
+                    {% if products %}
+                    <tr>
+                        <td class="column-1 h4">Total Price:</td>
+                        <td class="column-2"></td>
+                        <td class="column-3">${{ total_price | floatformat:2 }}</td>
+                    </tr>
+                    {% endif %}
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+
+<div id="cart-btn">
+    {% if products %}
+    <a href="{% url 'remove_all' %}" class="btn btn-black btn-outline-black ml-1 rounded-0">Clear Cart</a>
+    <a href="{% url 'checkout_order' %}" class="btn btn-black btn-outline-black ml-1 rounded-0">Checkout</a>
+    {% endif %}
+    <a href="{% url 'products_list' %}" class="btn btn-black btn-outline-black ml-1 rounded-0">Product-list</a>
+</div>
+
+
+{% endblock %}

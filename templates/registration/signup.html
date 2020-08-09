@@ -1,6 +1,53 @@
-<h1>Sing up</h1>
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Signup">
-</form>
+{% extends "base.html" %}
+{% block head_title %}Signup{% endblock %}
+
+{% block content %}
+
+
+
+<div class="site-section bg-light" id="contact-section" style="margin-top: 80px;">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-12 text-center">
+                <p class="section-title mb-3">Signup</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-7 mb-5">
+                <form action="" class="p-5 bg-white" method="POST" enctype="multipart/form-data">
+                    <div class="row form-group">
+                        {% csrf_token %}
+                        <div class="row form-group">
+                            <div class="col-md-12"><label for="id_username" class="text-black">User name:</label> <input type="text" name="username"
+                                    maxlength="150" autofocus="" required="" id="id_username" class="form-control rounded-0"></div>
+                            <div class="col-md-6"><label for="id_first_name" class="text-black">First name:</label> <input type="text" name="first_name"
+                                    maxlength="30" id="id_first_name" class="form-control rounded-0"></div>
+                            <div class="col-md-6"><label for="id_last_name" class="text-black">Last name:</label> <input type="text" name="last_name"
+                                    maxlength="30" id="id_last_name" class="form-control rounded-0"></div>
+                            <div class="col-md-12"><label for="id_email" class="text-black">Email:</label> <input type="email" name="email" maxlength="254" required="" id="id_email" class="form-control rounded-0"></div>
+                            <div class="col-md-6"><label for="id_password1" class="text-black">Password:</label> <input type="password" name="password1"
+                                    autocomplete="new-password" required="" id="id_password1" class="form-control rounded-0"> <span
+                                    class="helptext"></span></div>
+                            <ul>
+                                <li>Your password can’t be too similar to your other personal information.</li>
+                                <li>Your password must contain at least 8 characters.</li>
+                                <li>Your password can’t be a commonly used password.</li>
+                                <li>Your password can’t be entirely numeric.</li>
+                            </ul>
+                            <p></p>
+                            <div class="col-md-6"><label for="id_password2" class="text-black">Password confirmation:</label> <input type="password"
+                                    name="password2" autocomplete="new-password" required="" id="id_password2" class="form-control rounded-0"></div>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="Signup" class="btn btn-black rounded-0 py-3 px-4">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -20,7 +20,7 @@ DATABASES = {
 
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
+DEFAULT_FROM_EMAIL = 'webmaster@localhost.com'
 EMAIL_HOST = 'smtp-relay.sendinblue.com'
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')

@@ -9,6 +9,11 @@ class OrderForm(ModelForm):
         model = Order
         fields = ('address',)
 
+    def __init__(self, *args, **kwargs):
+        super(OrderForm, self).__init__(*args, **kwargs)
+        self.fields['address'].widget.attrs.update({'class' : 'form-control rounded-0'})
+
+
     def save_order(self, user):
         self.instance.user = user
         self.instance.save()

@@ -1,11 +1,18 @@
 {% extends "base.html" %}
-{% block head_title %}Reset Password{% endblock %}
+{% block head_title %}added-successfuly{% endblock %}
 
 {% block content %}
-<section>
-    <div>
-        <h1 class="section-headline">Product added Successfully!</h1>
-        <a class="back" href="{% url 'home' %}">Continue to homepage</a>
+<div class="site-section bg-light" style="margin:80px 0;">
+    <div class="container">
+        <div class="row mb-5 justify-content-center">
+            <div class="col-md-6 text-center">
+                <h3 class="section-title mb-3" style="margin:80px 0;">Product added Successfully!</h3>
+                <a href="{% url 'home' %}" class="btn btn-black btn-outline-black ml-1 rounded-0">Continue to
+                    home page</a>
+
+            </div>
+        </div>
     </div>
-</section>
+</div>
+
 {% endblock %}

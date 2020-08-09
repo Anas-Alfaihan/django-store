@@ -7,52 +7,197 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'normalize.css' %}" />
-    <link rel="stylesheet" href="{% static 'style.css' %}" />
-    <link href="https://fonts.googleapis.com/css?family=Questrial|Domine" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,700,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/aos.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
     <title>{% block head_title %}STORE{% endblock %}</title>
 </head>
 
-<body>
-    <div class="wrapper">
-        <!--HEADER-->
-        <header>
-            <h1 id="logo">
-                <a href="{% url 'home' %}">STORE</a>
-            </h1>
-            {% if user.is_authenticated %}
-            <p>Hi, {{user.username}}</p>
-            <a href="{% url 'cart' %}">Cart</a>
-            <a href="{% url 'logout' %}">Log Out</a>
-            {% else %}
-            <a href="{% url 'login' %}">Login</a>
-            {% endif %}
-            <div id="controls">
-                <div id="cart">
+<body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+    <div class="site-wrap">
+        <div class="site-mobile-menu site-navbar-target">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+            <div class="site-mobile-menu-body"></div>
+        </div>
+
+        <div class="top-bar py-3 bg-light" id="home-section">
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-6 text-left">
+                        <ul class="social-media">
+                            <li><a href="https://www.facebook.com/anas.abohamza.182" class=""><span
+                                        class="icon-facebook"></span></a></li>
+                            <li><a href="https://twitter.com/abohamza98" class=""><span class="icon-twitter"></span></a>
+                            </li>
+                            <li><a href="https://www.instagram.com/abo_hamza_anas/" class=""><span
+                                        class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-6">
+                        <p class="mb-0 float-right">
+                            <span><a href="mailto: [mike.gary.3.1@protonmail.com]?subject= &body= "><span
+                                        class="icon-envelope mr-2" style="position: relative; top: 2px;"></span><span
+                                        class="d-none d-lg-inline-block text-black">Email</span></a></span>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <header class="site-navbar py-4 bg-white js-sticky-header site-navbar-target" role="banner">
+
+            <div class="container">
+                <div class="row align-items-center">
+
+                    <div class="col-6 col-xl-2">
+                        <h1 class="mb-0 site-logo"><a href="{% url 'home' %}" class="text-black mb-0">STORE<span
+                                    class="text-primary">.</span> </a></h1>
+                    </div>
+                    
+                    <div class="col-12 col-md-10 d-none d-xl-block">
+                        <nav class="site-navigation position-relative text-right" role="navigation">
+
+                            <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
+                                <li><a href="{% url 'cart' %} " class="icons-btn d-inline-block bag li">
+                                        <span class="icon-shopping-bag"></span>
+                                        {% if request.user.cart.items.all|length > 0 %}
+                                        <span class="num">{{ request.user.cart.items.all|length }}</span>
+                                        {% endif %}
+                                    </a></li>
+                                <li><a href="#home-section" class="nav-link active">Home</a></li>
+                                <li><a href="#products-section" class="nav-link active">Products</a></li>
+                                <li><a href="#site-footer" class="nav-link active">About Us</a></li>
+                                {% if user.is_authenticated %}
+                                <li>
+                                    <a class="text-black nav-link">Hi, {{user.username}}</a>
+                                </li>
+                                <li><a href="{% url 'logout' %}"
+                                        class="btn btn-black btn-outline-black ml-1 rounded-0">Logout</a></li>
+
+                                {% else %}
+                                <li><a href="{% url 'login' %}"
+                                        class="btn btn-black btn-outline-black ml-1 rounded-0">Login</a></li>
+                                {% endif %}
+                            </ul>
+                        </nav>
+                    </div>
+                    <div class="col-6 d-inline-block d-xl-none ml-md-0 py-3" style="position: relative; top: 3px;"><a
+                            href="#" class="site-menu-toggle js-menu-toggle text-black float-right"><span
+                                class="icon-menu h3"></span></a></div>
                 </div>
             </div>
         </header>
-
-        <!--MAIN-->
-        <main>
-            {% block content %}{% endblock %}
-        </main>
     </div>
 
-    <!--FOOTER-->
-    <footer>
-        <a href="#" id="scroll-up">
-            <i class="fas fa-chevron-up"></i>
-        </a>
-        <!--2-->
-        <p>&copy; 2020 STORE All Rights Reserved.</p>
-        <!--2-->
+
+
+
+
+
+
+    <!--MAIN-->
+
+    {% block content %}{% endblock %}
+
+
+
+    <footer class="site-footer bg-white" id="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <h2 class="footer-heading mb-4">About Us</h2>
+                            <p>Since we believe that the best way to learn programming is through application and not
+                                through theoretical lessons that are not practically linked with real projects, we have
+                                created this platform to help you achieve your dream of training in the language of the
+                                future (programming) in effective ways.</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h2 class="footer-heading mb-4">Cortabz</h2>
+                            <a href="https://coretabs.net/about"> <img src="{% static 'images/Coretabs logo.png' %}"
+                                    alt="" width="240px"></a>
+
+                        </div>
+                        <div class="col-md-3">
+                            <h2 class="footer-heading mb-4">Follow Us</h2>
+                            <a href="https://www.facebook.com/CoretabsAcademy" class="pl-0 pr-3"><span
+                                    class="icon-facebook"></span></a>
+                            <a href="https://twitter.com/CoretabsAcademy" class="pl-3 pr-3"><span
+                                    class="icon-twitter"></span></a>
+                            <a href="https://www.instagram.com/CoretabsAcademy/" class="pl-3 pr-3"><span
+                                    class="icon-instagram"></span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 ml-auto">
+                    <h2 class="footer-heading mb-4">Featured Product</h2>
+                    <a href="#product-section"><img src="{% static 'images/product_1_bg.jpg' %}" alt="Image"
+                            class="img-fluid mb-3"></a>
+                    <h4 class="h5">Leather Brown Shoe</h4>
+                    <strong class="text-black mb-3 d-inline-block">$60.00</strong>
+                </div>
+            </div>
+            <div class="row pt-5 mt-5 text-center">
+                <div class="col-md-12">
+                    <div class="border-top pt-5">
+                        <p>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                            Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This
+                            template is made with <i class="icon-heart" aria-hidden="true"></i> by <a
+                                href="https://colorlib.com" target="_blank">Colorlib</a>|<a
+                                href="https://coretabs.net/">Coretabs</a>
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
-        crossorigin="anonymous"></script>
-</body>
+    </div>
 
-</html>
+
+
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'js/jquery-ui.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'js/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap-datepicker.min.js' %}"></script>
+    <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'js/aos.js' %}"></script>
+    <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'js/jquery.sticky.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+
+
+
+
+</body>
 
 </html>

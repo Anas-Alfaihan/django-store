@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-
 from .views import signup, activate_email
+
 
 urlpatterns = [
     path('accounts/signup/', signup, name='signup'),
